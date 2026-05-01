@@ -17,6 +17,8 @@ export const viewport: Viewport = {
   themeColor: '#0d9668',
 }
 
+import { Toaster } from "@/components/ui/sonner"
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -24,7 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        {children}
+        <Toaster position="top-right" />
+      </body>
     </html>
   )
 }
