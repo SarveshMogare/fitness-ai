@@ -37,6 +37,7 @@ USER PROFILE:
 - Activity Level: ${profile.activity_level?.replace("_", " ") || "Sedentary"}
 - Available Equipment: ${profile.available_equipment?.length ? profile.available_equipment.join(", ") : "Bodyweight only"}
 - Dietary Preference: ${profile.dietary_preference || "None"}
+- Dietary/Nutrition Requests: ${profile.dietary_notes || "None"}
 - Injuries/Notes: ${profile.injuries_notes || "None"}
 ${feedbackContext}
 
@@ -50,6 +51,7 @@ INSTRUCTIONS:
 7. For rest days, set is_rest_day to true with light activity suggestions
 8. All calorie and macro targets must align with the user's goal
 9. Meal plans must respect dietary preferences strictly
+10. IMPORTANT: You must honor all user Dietary/Nutrition Requests when creating the meal plan recipes.
 
 RESPONSE FORMAT: Return ONLY valid JSON matching this exact schema. No markdown, no explanation, just JSON.`;
 }

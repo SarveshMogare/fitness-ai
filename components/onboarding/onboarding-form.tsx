@@ -54,6 +54,7 @@ export function OnboardingForm() {
     activity_level: "sedentary",
     available_equipment: [] as string[],
     dietary_preference: "none",
+    dietary_notes: "",
     injuries_notes: "",
   });
 
@@ -311,6 +312,18 @@ export function OnboardingForm() {
                   <SelectItem value="gluten_free">Gluten Free</SelectItem>
                 </SelectContent>
               </Select>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="dietary_notes">
+                Dietary Requests & Allergies (optional)
+              </Label>
+              <Textarea
+                id="dietary_notes"
+                value={form.dietary_notes}
+                onChange={(e) => update("dietary_notes", e.target.value)}
+                placeholder="E.g., No beef, allergic to peanuts, love spicy food..."
+                rows={2}
+              />
             </div>
             <div className="grid gap-2">
               <Label htmlFor="injuries">

@@ -37,6 +37,7 @@ export interface Profile {
   activity_level: ActivityLevel;
   available_equipment: string[];
   dietary_preference: DietaryPreference;
+  dietary_notes: string | null;
   injuries_notes: string | null;
   onboarding_complete: boolean;
   created_at: string;

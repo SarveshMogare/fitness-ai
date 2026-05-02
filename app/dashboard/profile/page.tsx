@@ -92,6 +92,7 @@ export default function ProfilePage() {
         activity_level: form.activity_level,
         available_equipment: form.available_equipment,
         dietary_preference: form.dietary_preference,
+        dietary_notes: form.dietary_notes,
         injuries_notes: form.injuries_notes,
       }),
     });
@@ -283,6 +284,16 @@ export default function ProfilePage() {
                 <SelectItem value="gluten_free">Gluten Free</SelectItem>
               </SelectContent>
             </Select>
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="dietary_notes">Dietary Requests & Allergies</Label>
+            <Textarea
+              id="dietary_notes"
+              value={form.dietary_notes || ""}
+              onChange={(e) => update("dietary_notes", e.target.value)}
+              placeholder="E.g., No beef, allergic to peanuts..."
+              rows={2}
+            />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="injuries">Injuries or Medical Notes</Label>

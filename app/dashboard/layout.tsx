@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { SidebarNav } from "@/components/dashboard/sidebar-nav";
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
+import { HeartRateMonitor } from "@/components/dashboard/heart-rate-monitor";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 
@@ -41,6 +42,7 @@ export default function DashboardLayout({
 
   return (
     <div className="flex h-svh overflow-hidden">
+      <HeartRateMonitor />
       {/* Overlay for mobile */}
       {sidebarOpen && (
         <div
