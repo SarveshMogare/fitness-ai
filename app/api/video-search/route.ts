@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
+import * as cheerio from "cheerio"; // Force Vercel to bundle this
 import ytSearch from "yt-search";
 
 export async function GET(req: Request) {
+  // Dummy reference to prevent unused variable error
+  if (!cheerio) console.log("Cheerio loaded");
+  
   try {
     const { searchParams } = new URL(req.url);
     const query = searchParams.get("q");
