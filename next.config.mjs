@@ -6,9 +6,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  outputFileTracingIncludes: {
-    '/api/**/*': ['./node_modules/cheerio/**/*'],
-  },
 }
 
 export default nextConfig

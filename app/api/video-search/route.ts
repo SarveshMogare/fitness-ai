@@ -1,11 +1,6 @@
 import { NextResponse } from "next/server";
-import * as cheerio from "cheerio"; // Force Vercel to bundle this
-import ytSearch from "yt-search";
 
 export async function GET(req: Request) {
-  // Dummy reference to prevent unused variable error
-  if (!cheerio) console.log("Cheerio loaded");
-  
   try {
     const { searchParams } = new URL(req.url);
     const query = searchParams.get("q");
@@ -17,19 +12,30 @@ export async function GET(req: Request) {
       );
     }
 
-    const r = await ytSearch(query);
+    // Fetch the YouTube search results page directly
+    const res = await fetch(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+      }
+    });
     
-    // Get the top video result
-    const video = r.videos.length > 0 ? r.videos[0] : null;
+    if (!res.ok) {
+      throw new Error("Failed to fetch YouTube page");
+    }
 
-    if (!video) {
+    const html = await res.text();
+    
+    // Extract the first video ID from the ytInitialData JSON injected into the page
+    const match = html.match(/"videoId":"([^"]{11})"/);
+
+    if (match && match[1]) {
+      return NextResponse.json({ videoId: match[1] });
+    } else {
       return NextResponse.json(
         { error: "No video found" },
         { status: 404 }
       );
     }
-
-    return NextResponse.json({ videoId: video.videoId });
   } catch (error: any) {
     console.error("Video search error:", error);
     return NextResponse.json(
