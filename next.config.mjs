@@ -6,7 +6,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  serverExternalPackages: ['yt-search', 'cheerio'],
+  outputFileTracingIncludes: {
+    '/api/**/*': ['./node_modules/cheerio/**/*'],
+  },
 }
 
 export default nextConfig
