@@ -6,6 +6,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  serverExternalPackages: ['yt-search', 'cheerio'],
 }
 
 export default nextConfig
