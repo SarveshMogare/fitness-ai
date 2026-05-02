@@ -5,6 +5,8 @@ import { Progress } from "@/components/ui/progress";
 import { UtensilsCrossed } from "lucide-react";
 import type { NutritionPlan, Meal } from "@/lib/types";
 
+import { VideoModal } from "./video-modal";
+
 interface NutritionSummaryProps {
   plan: (NutritionPlan & { meals: Meal[] }) | null;
   dayNumber: number;
@@ -102,9 +104,15 @@ export function NutritionSummary({ plan, dayNumber }: NutritionSummaryProps) {
                 <p className="text-sm font-medium capitalize text-card-foreground">
                   {meal.meal_type}
                 </p>
-                <p className="text-xs text-muted-foreground">
-                  {meal.meal_name}
-                </p>
+                <div className="flex items-center gap-2">
+                  <p className="text-xs text-muted-foreground">
+                    {meal.meal_name}
+                  </p>
+                  <VideoModal 
+                    searchQuery={`how to make ${meal.meal_name} recipe healthy`}
+                    title={`Recipe: ${meal.meal_name}`}
+                  />
+                </div>
               </div>
               <span className="text-sm font-medium text-muted-foreground">
                 {meal.calories} cal

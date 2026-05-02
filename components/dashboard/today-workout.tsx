@@ -3,8 +3,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Flame, Dumbbell } from "lucide-react";
+import { Clock, Flame, Dumbbell, PlayCircle } from "lucide-react";
 import type { DailyWorkout, Exercise } from "@/lib/types";
+
+import { VideoModal } from "./video-modal";
 
 export function TodayWorkout({
   workout,
@@ -87,22 +89,30 @@ export function TodayWorkout({
           {exercises
             .sort((a: Exercise, b: Exercise) => a.order_index - b.order_index)
             .map((exercise: Exercise) => (
-              <label
+              <div
                 key={exercise.id}
-                className="flex cursor-pointer items-center gap-3 rounded-lg border border-border p-3 transition-colors hover:bg-muted/50"
+                className="flex items-center gap-3 rounded-lg border border-border p-3 transition-colors hover:bg-muted/50"
               >
                 <Checkbox
+                  id={`exercise-${exercise.id}`}
                   checked={exercise.completed}
                   onCheckedChange={(checked) =>
                     onToggleExercise(exercise.id, checked === true)
                   }
                 />
                 <div className="flex-1">
-                  <p
-                    className={`text-sm font-medium ${exercise.completed ? "text-muted-foreground line-through" : "text-card-foreground"}`}
-                  >
-                    {exercise.name}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <label
+                      htmlFor={`exercise-${exercise.id}`}
+                      className={`cursor-pointer text-sm font-medium ${exercise.completed ? "text-muted-foreground line-through" : "text-card-foreground"}`}
+                    >
+                      {exercise.name}
+                    </label>
+                    <VideoModal 
+                      searchQuery={`how to do ${exercise.name} exercise`}
+                      title={`How to do: ${exercise.name}`}
+                    />
+                  </div>
                   <p className="text-xs text-muted-foreground">
                     {exercise.sets && `${exercise.sets} sets`}
                     {exercise.reps && ` x ${exercise.reps}`}
@@ -117,7 +127,7 @@ export function TodayWorkout({
                     {exercise.muscle_group}
                   </Badge>
                 )}
-              </label>
+              </div>
             ))}
         </div>
       </CardContent>
